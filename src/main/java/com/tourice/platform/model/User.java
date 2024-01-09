@@ -12,7 +12,9 @@ import java.util.HashSet;
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "UserDetail")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,8 +22,8 @@ public class User {
     private String lastName;
     private String email;
     private String password;
-    @ManyToMany(fetch = FetchType.EAGER,
-            cascade = {CascadeType.PERSIST,
+
+    @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST,
                     CascadeType.MERGE, CascadeType.DETACH})
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),

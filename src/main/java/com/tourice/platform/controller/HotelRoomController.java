@@ -30,13 +30,13 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/rooms")
+@RequestMapping("api/v1/hotel-rooms")
 public class HotelRoomController {
     private final IRoomService roomService;
     private final BookingService bookingService;
 
-    @PostMapping("/add/new-room")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/add")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<RoomResponse> addNewRoom(
             @RequestParam("photo") MultipartFile photo,
             @RequestParam("roomType") String roomType,
