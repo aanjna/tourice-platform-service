@@ -2,7 +2,7 @@ package com.tourice.platform.controller;
 
 import com.tourice.platform.exception.ResourceNotFoundException;
 import com.tourice.platform.exception.PhotoRetrievalException;
-import com.tourice.platform.model.BookedRoom;
+import com.tourice.platform.model.BookingDetails;
 import com.tourice.platform.model.HotelRoom;
 import com.tourice.platform.response.BookingResponse;
 import com.tourice.platform.response.RoomResponse;
@@ -34,6 +34,8 @@ import java.util.Optional;
 public class HotelRoomController {
     private final IRoomService roomService;
     private final BookingService bookingService;
+
+//    getAvailability(checkInDate: Date, checkOutDate: Date): List<Room>
 
     @PostMapping("/add")
 //    @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -122,7 +124,7 @@ public class HotelRoomController {
     }
 
     private RoomResponse getRoomResponse(HotelRoom room) {
-        List<BookedRoom> bookings = getAllBookingsByRoomId(room.getId());
+        List<BookingDetails> bookings = getAllBookingsByRoomId(room.getId());
        List<BookingResponse> bookingInfo = bookings
                 .stream()
                 .map(booking -> new BookingResponse(booking.getBookingId(),
@@ -142,7 +144,7 @@ public class HotelRoomController {
                 room.isBooked(), photoBytes, bookingInfo);
     }
 
-    private List<BookedRoom> getAllBookingsByRoomId(Long roomId) {
+    private List<BookingDetails> getAllBookingsByRoomId(Long roomId) {
         return bookingService.getAllBookingsByRoomId(roomId);
 
     }

@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookedRoom {
+public class BookingDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long bookingId;

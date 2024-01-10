@@ -1,6 +1,7 @@
 package com.tourice.platform.response;
 
 
+import com.tourice.platform.model.RoomType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.tomcat.util.codec.binary.Base64;
@@ -12,19 +13,19 @@ import java.util.List;
 @NoArgsConstructor
 public class RoomResponse {
     private Long id;
-    private String roomType;
+    private RoomType roomType;
     private BigDecimal roomPrice;
     private boolean isBooked;
     private String photo;
     private List<BookingResponse>bookings;
 
-    public RoomResponse(Long id, String roomType, BigDecimal roomPrice) {
+    public RoomResponse(Long id, RoomType roomType, BigDecimal roomPrice) {
         this.id = id;
         this.roomType = roomType;
         this.roomPrice = roomPrice;
     }
 
-    public RoomResponse(Long id, String roomType, BigDecimal roomPrice, boolean isBooked,
+    public RoomResponse(Long id, RoomType roomType, BigDecimal roomPrice, boolean isBooked,
                         byte[] photoBytes , List<BookingResponse> bookings) {
         this.id = id;
         this.roomType = roomType;

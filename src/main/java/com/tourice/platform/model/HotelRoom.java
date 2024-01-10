@@ -19,19 +19,20 @@ public class HotelRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
-    private String roomType;
+    private RoomType roomType;
     private BigDecimal roomPrice;
     private boolean isBooked = false;
     @Lob
     private Blob photo;
-
+    private RoomStatus status;
+    private String noOfRoomsAvailable;
     @OneToMany(mappedBy="room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<BookedRoom> bookings;
+    private List<BookingDetails> bookings;
 
     public HotelRoom() {
         this.bookings = new ArrayList<>();
     }
-    public void addBooking(BookedRoom booking){
+    public void addBooking(BookingDetails booking){
         if (bookings == null){
             bookings = new ArrayList<>();
         }

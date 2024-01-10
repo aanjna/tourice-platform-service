@@ -1,6 +1,6 @@
 package com.tourice.platform.service;
 
-import com.tourice.platform.model.BookedRoom;
+import com.tourice.platform.model.BookingDetails;
 
 import java.util.List;
 
@@ -8,13 +8,13 @@ import java.util.List;
 public interface IBookingService {
     void cancelBooking(Long bookingId);
 
-    List<BookedRoom> getAllBookingsByRoomId(Long roomId);
+    List<BookingDetails> getAllBookingsByRoomId(Long roomId);
 
-    String saveBooking(Long roomId, BookedRoom bookingRequest);
+    String saveBooking(Long roomId, BookingDetails bookingRequest);
 
-    BookedRoom findByBookingConfirmationCode(String confirmationCode);
+    BookingDetails findByBookingConfirmationCode(String confirmationCode);
 
-    List<BookedRoom> getAllBookings();
+    List<BookingDetails> getAllBookings();
 
-    List<BookedRoom> getBookingsByUserEmail(String email);
+    List<BookingDetails> getBookingsByUserEmail(String email);
 }

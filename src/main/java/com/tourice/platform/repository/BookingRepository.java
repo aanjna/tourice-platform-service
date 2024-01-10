@@ -1,17 +1,17 @@
 package com.tourice.platform.repository;
 
-import com.tourice.platform.model.BookedRoom;
+import com.tourice.platform.model.BookingDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 
-public interface BookingRepository extends JpaRepository<BookedRoom, Long> {
+public interface BookingRepository extends JpaRepository<BookingDetails, Long> {
 
-    List<BookedRoom> findByRoomId(Long roomId);
+    List<BookingDetails> findByRoomId(Long roomId);
 
- Optional<BookedRoom> findByBookingConfirmationCode(String confirmationCode);
+ Optional<BookingDetails> findByBookingConfirmationCode(String confirmationCode);
 
-    List<BookedRoom> findByGuestEmail(String email);
+    List<BookingDetails> findByGuestEmail(String email);
 }

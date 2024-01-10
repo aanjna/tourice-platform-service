@@ -3,7 +3,7 @@ package com.tourice.platform.service;
 import com.tourice.platform.exception.InvalidBookingRequestException;
 import com.tourice.platform.exception.ResourceNotFoundException;
 import com.tourice.platform.repository.BookingRepository;
-import com.tourice.platform.model.BookedRoom;
+import com.tourice.platform.model.BookingDetails;
 import com.tourice.platform.model.HotelRoom;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,13 +17,13 @@ public class BookingService implements IBookingService {
 
 
     @Override
-    public List<BookedRoom> getAllBookings() {
+    public List<BookingDetails> getAllBookings() {
         return bookingRepository.findAll();
     }
 
 
     @Override
-    public List<BookedRoom> getBookingsByUserEmail(String email) {
+    public List<BookingDetails> getBookingsByUserEmail(String email) {
         return bookingRepository.findByGuestEmail(email);
     }
 
@@ -33,17 +33,17 @@ public class BookingService implements IBookingService {
     }
 
     @Override
-    public List<BookedRoom> getAllBookingsByRoomId(Long roomId) {
+    public List<BookingDetails> getAllBookingsByRoomId(Long roomId) {
         return bookingRepository.findByRoomId(roomId);
     }
 
     @Override
-    public String saveBooking(Long roomId, BookedRoom bookingRequest) {
+    public String saveBooking(Long roomId, BookingDetails bookingRequest) {
         if (bookingRequest.getCheckOutDate().isBefore(bookingRequest.getCheckInDate())){
             throw new InvalidBookingRequestException("Check-in date must come before check-out date");
         }
         HotelRoom room = roomService.getRoomById(roomId).get();
-        List<BookedRoom> existingBookings = room.getBookings();
+        List<BookingDetails> existingBookings = room.getBookings();
         boolean roomIsAvailable = roomIsAvailable(bookingRequest,existingBookings);
         if (roomIsAvailable){
             room.addBooking(bookingRequest);
@@ -55,14 +55,14 @@ public class BookingService implements IBookingService {
     }
 
     @Override
-    public BookedRoom findByBookingConfirmationCode(String confirmationCode) {
+    public BookingDetails findByBookingConfirmationCode(String confirmationCode) {
         return bookingRepository.findByBookingConfirmationCode(confirmationCode)
                 .orElseThrow(() -> new ResourceNotFoundException("No booking found with booking code :"+confirmationCode));
 
     }
 
 
-    private boolean roomIsAvailable(BookedRoom bookingRequest, List<BookedRoom> existingBookings) {
+    private boolean roomIsAvailable(BookingDetails bookingRequest, List<BookingDetails> existingBookings) {
         return existingBookings.stream()
                 .noneMatch(existingBooking ->
                         bookingRequest.getCheckInDate().equals(existingBooking.getCheckInDate())
