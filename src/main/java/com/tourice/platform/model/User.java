@@ -1,18 +1,18 @@
 package com.tourice.platform.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Collection;
 import java.util.HashSet;
 
 @Entity
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "UserDetail")
+@AllArgsConstructor
+@Table(name = "user_detail")
 public class User {
 
     @Id
@@ -29,7 +29,5 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles = new HashSet<>();
-
-
 
 }

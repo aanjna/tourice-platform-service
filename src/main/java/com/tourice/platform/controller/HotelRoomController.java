@@ -1,7 +1,7 @@
 package com.tourice.platform.controller;
 
-import com.tourice.platform.exception.ResourceNotFoundException;
 import com.tourice.platform.exception.PhotoRetrievalException;
+import com.tourice.platform.exception.ResourceNotFoundException;
 import com.tourice.platform.model.BookingDetails;
 import com.tourice.platform.model.HotelRoom;
 import com.tourice.platform.response.BookingResponse;

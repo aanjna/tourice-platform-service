@@ -19,7 +19,7 @@ public class HotelRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
-    private RoomType roomType;
+    private String roomType;
     private BigDecimal roomPrice;
     private boolean isBooked = false;
     @Lob
